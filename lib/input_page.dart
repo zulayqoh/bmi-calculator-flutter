@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+const bottomContainerHeight = 80.0;
+const cardColor = Color(0xFF1D1E33);
+const bottomContainerColor = Color(0xFFE31555);
 
 class InputPage extends StatefulWidget {
   @override
@@ -10,7 +15,7 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF0A0E21),
+        backgroundColor: cardColor,
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
@@ -20,12 +25,13 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    colour: Color(0xFF1D1E33),
+                    colour: cardColor,
+                    cardChild: ReusableChildContent(),
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: Color(0xFF1D1E33),
+                    colour: cardColor,
                   ),
                 ),
               ],
@@ -33,7 +39,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ReusableCard(
-              colour: Color(0xFF1D1E33),
+              colour: cardColor,
             ),
           ),
           Expanded(
@@ -41,21 +47,21 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    colour: Color(0xFF1D1E33),
+                    colour: cardColor,
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: Color(0xFF1D1E33),
+                    colour: cardColor,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: Color(0xFFE31555),
+            color: bottomContainerColor,
             width: double.infinity,
-            height: 80.0,
+            height: bottomContainerHeight,
             margin: EdgeInsets.only(top: 10.0),
           ),
         ],
@@ -64,10 +70,40 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
+class ReusableChildContent extends StatelessWidget {
+  const ReusableChildContent({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center ,
+      children: const [
+        Icon(
+          FontAwesomeIcons.mars,
+          size: 80.0,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          'MALE',
+          style: TextStyle(
+            fontSize: 18.0,
+            color: Color(0xFF8D8E98),
+          ),
+        )
+      ],
+    );
+  }
+}
+
 class ReusableCard extends StatelessWidget {
-  ReusableCard({required this.colour});
+  ReusableCard({required this.colour, this.cardChild});
 
   final Color colour;
+  final Widget? cardChild;
 
   @override
   Widget build(BuildContext context) {
